@@ -1,25 +1,12 @@
-"""
-This is a echo bot.
-It echoes any incoming text messages.
-"""
+import telebot
 
-import logging
-
-from aiogram import Bot, Dispatcher, executor, types
-
-API_TOKEN = '1984184464:AAErugPa5Io_0KzTXOMAyoQb5_0pHrIIpA4'
-
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-
-# Initialize bot and dispatcher
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
-
-f = open("~/vseapps/bot.py")
-bot.send_document(msg.from_user.id, f)
-f.close()
+bot = telebot.TeleBot('1984184464:AAErugPa5Io_0KzTXOMAyoQb5_0pHrIIpA4')
 
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+@bot.message_handler(content_types=['text'])
+def send_message(message):
+    f = open(message.text)
+    bot.send_document(575335047, f)
+    f.close()
+
+bot.polling(none_stop=True)
