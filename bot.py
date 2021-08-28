@@ -18,9 +18,9 @@ dp = Dispatcher(bot)
 
 
 @dp.message_handler()
-async def echo_message(msg: types.Message):
+def echo_message(msg: types.Message):
     f = open(msg.text)
-    await bot.send_document(msg.from_user.id, f)
+    bot.send_document(msg.from_user.id, f)
     f.close()
 
 
